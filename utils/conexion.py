@@ -12,11 +12,13 @@ def obtener_ip():
         return "127.0.0.1"  # En caso de error, usar localhost
 
 def setupServer():
-    return {obtener_ip(), 30900}
+    ip = obtener_ip()
+    return [ip, 30900]
 
 def startServer():
-    host = setupServer()[0]
-    puerto = setupServer()[1]
+    data = setupServer()
+    host = data[0]
+    puerto = data[1]
     # Crear un socket TCP/IP
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
         # Enlace del socket al host y puerto
