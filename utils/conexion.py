@@ -39,5 +39,4 @@ def startServer():
 def startClient(mensaje, ip):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
         cliente.connect((ip, 30900))
-        mensaje = 'Hola mundo'
         cliente.sendall(mensaje.encode())
