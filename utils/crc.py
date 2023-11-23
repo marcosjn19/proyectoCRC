@@ -1,39 +1,66 @@
 global polinomioGenerador 
 polinomioGenerador = 0
-import binario
+
 polinomios = {
+    '3':'0b1101',
     '4':'0b10011',  #Polinomio CRC-4   -> 4bits
     '8':'0b100000111', #Polinomio CRC-8 -> 8bits
     '12':'0b1100000001111', #Polinomio CRC-12 -> 12bits
     '16':'0b11000000000000101', #Polinomio CRC-16 -> 16bits
-    '32':'0b100110000010001110110110111', #Polinomio CRC-32 -> 32bits
-    '64':'0b100001011110000111000011110101110101001111010100011011010010011' #Polinomio CRC-64 -> 64bits
+    #'32':'0b100110000010001110110110111', #Polinomio CRC-32 -> 32bits
+     '32':'0b100000100100000010000110110110101',
+    '64':'0b10000000000000000000000000000000000000000000000000000000000011011' #Polinomio CRC-64 -> 64bits
 }
 
-def residuo ( mensaje, gradoPolinomio ):
-    valores_ascii = binario.toPureBin(mensaje)
-    valores_ascii = valores_ascii << int(gradoPolinomio)
-    int_polinomio = int(polinomios[gradoPolinomio],2)
-    resultado = valores_ascii % int_polinomio
-    return(bin(resultado)[2::])
-
 def residuoBin ( mensaje: bin, gradoPolinomio ):
-    mensaje = mensaje<<int(gradoPolinomio)
-    int_polinomio = int(polinomios[gradoPolinomio],2)
-    resultado = mensaje % int_polinomio
-    return(bin(resultado)[2::])
+    mensaje = int(mensaje,2)<<int(gradoPolinomio)
+    mensajeBits = bin(mensaje)[2::]
+    sizeMensaje = len(mensajeBits)
+    polinomio = polinomios[gradoPolinomio][2::]
+
+    resultado = int(mensajeBits[0:int(gradoPolinomio)+1],2) ^ int(polinomio,2)
+    resultado = bin(resultado)
+    #print("Primer resultado: " + resultado)
+    for i in range (int(gradoPolinomio)+1, sizeMensaje):
+        if ( len(resultado)-2 == len(polinomio)):
+            resultado = int(resultado,2) ^ int(polinomio,2)
+            resultado = bin(resultado)
+            #print(f"Resultado de la iteracion {i} = {resultado}")
+        else:
+            resultado += mensajeBits[i]
+            #print(f"Resultado de la iteracion {i} = {resultado}")
+            if ( len(resultado)-2 == len(polinomio)):
+                resultado = int(resultado,2) ^ int(polinomio,2)
+                resultado = bin(resultado)
+                #print(f"Resultado de la iteracion {i} = {resultado}")
+
+    return(resultado[2::])
+
+def getEnvio ( mensaje, gradoPolinomio ):
+    #mensajeBin = (int(mensaje,2)<<int(gradoPolinomio)) + int(residuoBin(mensaje,gradoPolinomio),2)
+    residuo = residuoBin(mensaje,gradoPolinomio).zfill(int(gradoPolinomio))
+    mensajeBin = mensaje + residuo
+    return mensajeBin
 
 #FUNCION PARA SACAR LOS N DIGITOS QUE SE SACARON DEL ^
 def obtenerMensajeOG ( mensaje:bin, gradoPolinomio ):
     grado = int(gradoPolinomio)
+    calculado = mensaje[len(mensaje)-int(gradoPolinomio)::]
     mensajeOG = int(mensaje,2) >> grado
-    return mensajeOG
+    residuoC = residuoBin(bin(mensajeOG), gradoPolinomio)
+    correcto = False
+    if int(residuoC) == int(calculado):
+        correcto = True
+    return {0:bin(mensajeOG), 1:calculado, 2:correcto}
 
 
-mensaje = 'a'
-print(residuo(mensaje,'16'))
-mensajeBin = bin(binario.toPureBin(mensaje))
-mensajeBin += residuo(mensaje,'16')
-print(mensajeBin)
-mensajeOG = obtenerMensajeOG(mensajeBin, '16')
-print(mensajeOG)
+mensajeOriginal = '0b1101'
+print(f"MENSAJE ORIGINAL:{mensajeOriginal}")
+
+#EMISOR (EL QUE ENVIA EL MENSAJE, CLIENTE)
+mensajeEnviado = getEnvio(mensajeOriginal, '4')
+print(f"MENSAJE ENVIADO: {mensajeEnviado}")
+
+#RECEPTOR (EL QUE RECIBE EL MENSAJE, SERVIDOR)
+mensajeRecibido = obtenerMensajeOG(mensajeEnviado,'4')
+print(f"MENSAJE RECIBIDO: {mensajeRecibido[0]}  CALCULADO: {mensajeRecibido[1]}  LLEGO CORRECTO: {mensajeRecibido[2]}")
