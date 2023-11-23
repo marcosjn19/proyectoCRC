@@ -34,7 +34,7 @@ def startServer():
 
         # Recibir y mostrar datos del cliente
         datos = conexion.recv(1024)
-        print(f'Datos recibidos: {datos.decode()}')
+        return datos.decode()
 
 def startClient(mensaje, ip):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
