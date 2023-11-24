@@ -1,14 +1,10 @@
 import tkinter as tk
 from utils import binario
 from utils import crc
-
+from utils import conexion
 #  canva principal
 canva = tk.Tk()
 canva.title("MARCOS JUAREZ - GAEL COSTILLA")
-#---------------------------------------------------------------
-def seleccionado( event ):
-    seleccionado = lista.get( lista.curselection() )
-    label_resultado.config( text = f"Seleccionado: {seleccionado}")
 #---------------------------------------------------------------
 def actualizar_binario( event ):
         #mensaje obtendra lo que sta dentro de nuesto text area, desde la posicion 1 hasta el final 
@@ -29,8 +25,7 @@ nuevo_text_area = None
 def seleccionado(event):
     global nuevo_text_area
     seleccion1 = lista.get(lista.curselection())
-
-
+    setSelected(seleccion1)
     # Si se selecciona el elemento 3 o 4, crea y muestra un nuevo Text
     if seleccion1 in ["3", "4"]:
         if nuevo_text_area:
@@ -41,9 +36,11 @@ def seleccionado(event):
         if nuevo_text_area:
             nuevo_text_area.destroy()
             label_nuevo_area.destroy()
-
+    return seleccion1
             
-
+def setSelected(seleccion):
+    global selected
+    selected = seleccion
 # Función para crear y mostrar un nuevo Text
 def crear_nuevo_text_area():
     global nuevo_text_area, label_nuevo_area
@@ -107,8 +104,10 @@ area_Binario.pack(pady=10)
 # Agregar un botón
 
 def clickEnviar():
-    print("ENVIADO")
-    
+    direccionip = ip.get ( "1.0", 'end-1c' )
+    print(direccionip)
+    mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
+    conexion.startClient(crc.getEnvio(mensaje_binario, selected), direccionip)
 boton = tk.Button(canva, text="Enviar", command=clickEnviar)
 boton.pack(pady=10)
 
