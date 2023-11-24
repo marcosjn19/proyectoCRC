@@ -18,9 +18,6 @@ def seleccionado( event ):
     label_resultado.config( text = f"Seleccionado: {seleccionado}")
 #---------------------------------------------------------------
 
-
-
-#-----------------------------------------------------------
 # Establecer el color de fondo de la ventana
 canva.configure( background = "#2E8B57" )  # Puedes cambiar el código de color a tu preferencia
 

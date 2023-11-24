@@ -105,7 +105,6 @@ area_Binario.place(x=260,y=500)
 
 def clickEnviar():
     direccionip = ip.get ( "1.0", 'end-1c' )
-    print(direccionip)
     if ( selected in ['3','4']):
         mensaje_binario = '0b' + nuevo_text_area.get('1.0', 'end-1c')
     else:
