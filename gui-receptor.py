@@ -42,7 +42,7 @@ lista.place(x=230,y=100)
 
 for i in elementos:
     lista.insert(tk.END, i)
-lista.pack(side=tk.LEFT, padx=5, pady=10)
+
 lista.bind("<<ListboxSelect>>", seleccionado)
 
 label_resultado = tk.Label(canva, text="")
@@ -62,7 +62,7 @@ label_Binario.place(x=130,y=490)
 area_Binario = tk.Label(canva, height=10, width=40, textvariable=mensajeBinarioRecibido)
 area_Binario.place(x=250,y=490)
 
-#---------------------------------------------
+#-------------------------------------------------
 
 label_bandera = tk.Label(canva, text= " Bandera ")
 label_bandera.place(x=50, y=50)
