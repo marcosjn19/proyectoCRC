@@ -30,11 +30,12 @@ label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text = " Selecciona un elemento: " )
-label.pack( side = tk.LEFT, padx=5, pady=4 )
+label = tk.Label( canva, text = " Selecciona un elemento:" )
+label.place(x=120,y=100)
 
 elementos = [ "3", "4", "8", "12", "16", "32", "64", "84" ]
 lista = tk.Listbox( canva, selectmode = tk.SINGLE )
+lista.place(x=230,y=100)
 
 for i in elementos:
     lista.insert(tk.END, i)
@@ -42,22 +43,22 @@ lista.pack(side=tk.LEFT, padx=5, pady=10)
 lista.bind("<<ListboxSelect>>", seleccionado)
 
 label_resultado = tk.Label(canva, text="")
-label_resultado.pack(pady=10)
+lista.place(x=260,y=100)
 
 label_mensaje= tk.Label(canva, text="Mensaje recibido", bg="#0a0a0a", fg="#FFFFFF", state=tk.DISABLED)
-label_mensaje.pack(pady=10)
+label_mensaje.place(x=130,y=270)
 
 
 area_texto = tk.Text(canva, height=10, width=40, state=tk.DISABLED)
-area_texto.pack(pady=10)
+area_texto.place(x=250,y=270)
 area_texto.bind("<KeyRelease>", actualizar_binario)
 
 
 label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF")
-label_Binario.pack(pady=10)
+label_Binario.place(x=130,y=490)
 
 area_Binario = tk.Text(canva, height=10, width=40, )
-area_Binario.pack(pady=10)
+area_Binario.place(x=250,y=490)
 
 #---------------------------------------------
 
