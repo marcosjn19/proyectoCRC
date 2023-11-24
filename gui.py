@@ -51,10 +51,6 @@ def crear_nuevo_text_area():
     label_nuevo_area.pack(pady=5)
     nuevo_text_area = tk.Text(canva, height=5, width=40)
     nuevo_text_area.pack(pady=10)
-   
-
-
-
 
 #-----------------------------------------------------------
 # Establecer el color de fondo de la ventana
@@ -67,6 +63,12 @@ canva.geometry( "700x800" )
 label = tk.Label( canva, text="CRC", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
+
+label_ip= tk.Label(canva, text="ip")
+label_ip.place(x=50, y=50)
+
+ip=tk.Text(canva, height=1, width=15)
+ip.place(x=80, y=50)
 
 # Crear un widget de etiqueta
 label = tk.Label( canva, text = " Selecciona un elemento: ", bg="#0a0a0a", fg="#FFFFFF" , font=("Helvetica",12))

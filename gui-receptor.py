@@ -56,11 +56,15 @@ area_texto.bind("<KeyRelease>", actualizar_binario)
 label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF")
 label_Binario.pack(pady=10)
 
-area_Binario = tk.Text(canva, height=10, width=40, state=tk.DISABLED)
+area_Binario = tk.Text(canva, height=10, width=40, )
 area_Binario.pack(pady=10)
 
 #---------------------------------------------
 
+label_bandera = tk.Label(canva, text= " Bandera ")
+label_bandera.place(x=50, y=50)
 
+text_bandera = tk.Label(canva,  height=2, width=4)
+text_bandera.place(x=120, y=50)
 
 canva.mainloop()
