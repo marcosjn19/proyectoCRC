@@ -62,7 +62,7 @@ label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text = " Selecciona un elemento: " )
+label = tk.Label( canva, text = " Selecciona un elemento: ", bg="#0a0a0a", fg="#FFFFFF" , font=("Helvetica",12))
 label.pack( side = tk.LEFT, padx=5, pady=4 )
 
 elementos = [ "3", "4", "8", "12", "16", "32", "64", "84" ]
@@ -76,7 +76,7 @@ lista.bind("<<ListboxSelect>>", seleccionado)
 label_resultado = tk.Label(canva, text="")
 label_resultado.pack(pady=10)
 
-label_mensaje= tk.Label(canva, text="ingresa tu mensaje", bg="#0a0a0a", fg="#FFFFFF")
+label_mensaje= tk.Label(canva, text="ingresa tu mensaje", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
 label_mensaje.pack(pady=10)
 
 def on_validate(P):
@@ -88,7 +88,7 @@ area_texto.pack(pady=10)
 area_texto.bind("<KeyRelease>", actualizar_binario)
 
 
-label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF")
+label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
 label_Binario.pack(pady=10)
 
 area_Binario = tk.Text(canva, height=10, width=40)
