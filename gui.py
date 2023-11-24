@@ -27,17 +27,20 @@ def seleccionado(event):
     # Si se selecciona el elemento 3 o 4, crea y muestra un nuevo Text
     if seleccion1 in ["3", "4"]:
         if nuevo_text_area:
-            nuevo_text_area.destroy()  # Elimina el Text existente si hay alguno
+            nuevo_text_area.destroy()
+            label_nuevo_area.destroy() 
         crear_nuevo_text_area()
     else:
         if nuevo_text_area:
-            nuevo_text_area.destroy()  # Elimina el Text existente si hay alguno
+            nuevo_text_area.destroy()
+            label_nuevo_area.destroy()
+
             
 
 # Función para crear y mostrar un nuevo Text
 def crear_nuevo_text_area():
-    global nuevo_text_area
-    label_nuevo_area = tk.Label(canva, text="Nuevo Text Area:")
+    global nuevo_text_area, label_nuevo_area
+    label_nuevo_area = tk.Label(canva, text="Ingresa mensaje:")
     label_nuevo_area.pack(pady=5)
     nuevo_text_area = tk.Text(canva, height=5, width=40)
     nuevo_text_area.pack(pady=10)
@@ -51,7 +54,7 @@ def crear_nuevo_text_area():
 canva.configure( background = "#0a0a0a" )  # Puedes cambiar el código de color a tu preferencia
 
 #darle tamañito al canvansito poke ta chiquito
-canva.geometry( "700x700" )
+canva.geometry( "700x800" )
 
 # Crear un widget de etiqueta
 label = tk.Label( canva, text="CRC", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
@@ -92,7 +95,9 @@ area_Binario = tk.Text(canva, height=10, width=40)
 area_Binario.pack(pady=10)
 
 #---------------------------------------------
-
+# Agregar un botón
+boton = tk.Button(canva, text="Enviar")
+boton.pack(pady=10)
 
 
 canva.mainloop()
