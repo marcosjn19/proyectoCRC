@@ -57,7 +57,7 @@ canva.configure( background = "#0a0a0a" )  # Puedes cambiar el código de color 
 canva.geometry( "700x800" )
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text="CRC", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
+label = tk.Label( canva, text="CRC-Emisor", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
@@ -69,37 +69,37 @@ ip.place(x=80, y=50)
 
 # Crear un widget de etiqueta
 label = tk.Label( canva, text = " Selecciona un elemento: ", bg="#0a0a0a", fg="#FFFFFF" , font=("Helvetica",12))
-label.pack( side = tk.LEFT, padx=5, pady=4 )
+label.place(x=120,y=100)
 
 elementos = [ "3", "4", "8", "12", "16", "32", "64", "84" ]
 lista = tk.Listbox( canva, selectmode = tk.SINGLE )
+lista.place(x=320,y=100)
 
 for i in elementos:
     lista.insert(tk.END, i)
-lista.pack(side=tk.LEFT, padx=5, pady=10)
+
 lista.bind("<<ListboxSelect>>", seleccionado)
 
 label_resultado = tk.Label(canva, text="")
-label_resultado.pack(pady=10)
+label_resultado.place(x=130,y=400)
 
 label_mensaje= tk.Label(canva, text="ingresa tu mensaje", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
-label_mensaje.pack(pady=10)
+label_mensaje.place(x=120,y=270)
 
 def on_validate(P):
     return len(P) <= 50
 
 validate_cmd = (canva.register(on_validate), '%P')
 area_texto = tk.Text(canva, height=10, width=40)
-area_texto.pack(pady=10)
+area_texto.place(x=260,y=290)
 area_texto.bind("<KeyRelease>", actualizar_binario)
 
 
 label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
-label_Binario.pack(pady=10)
+label_Binario.place(x=120,y=490)
 
 area_Binario = tk.Text(canva, height=10, width=40)
-area_Binario.pack(pady=10)
-
+area_Binario.place(x=260,y=500)
 #---------------------------------------------
 # Agregar un botón
 
@@ -109,6 +109,6 @@ def clickEnviar():
     mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
     conexion.startClient(crc.getEnvio(mensaje_binario, selected), direccionip)
 boton = tk.Button(canva, text="Enviar", command=clickEnviar)
-boton.pack(pady=10)
+boton.place(x=250,y=700)
 
 canva.mainloop()
