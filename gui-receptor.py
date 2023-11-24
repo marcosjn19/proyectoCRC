@@ -36,7 +36,7 @@ label.pack( pady = 10 )
 label = tk.Label( canva, text = " Selecciona un elemento:" )
 label.place(x=120,y=100)
 
-elementos = [ "3", "4", "8", "12", "16", "32", "64", "84" ]
+elementos = [ "3", "4", "8", "12", "16", "32", "64" ]
 lista = tk.Listbox( canva, selectmode = tk.SINGLE )
 lista.place(x=230,y=100)
 
@@ -83,6 +83,10 @@ def recibirMensaje():
     mensajeBinarioRecibido.set(datosMensaje[0][2::])
     mensajeBinstr = mensajeBinarioRecibido.get()
     mensajeRecibido.set(binario.fromBin(mensajeBinstr))
+    if ( datosMensaje[2] == True ):
+        text_bandera.config(background="Green")
+    else:
+        text_bandera.config(background="Red")
 
 boton = tk.Button(canva, text="RECIBIR", command=recibirMensaje)
 boton.place(x = 550, y = 100)

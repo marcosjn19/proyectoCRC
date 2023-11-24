@@ -71,7 +71,7 @@ ip.place(x=80, y=50)
 label = tk.Label( canva, text = " Selecciona un elemento: ", bg="#0a0a0a", fg="#FFFFFF" , font=("Helvetica",12))
 label.place(x=120,y=100)
 
-elementos = [ "3", "4", "8", "12", "16", "32", "64", "84" ]
+elementos = [ "3", "4", "8", "12", "16", "32", "64" ]
 lista = tk.Listbox( canva, selectmode = tk.SINGLE )
 lista.place(x=320,y=100)
 
@@ -106,7 +106,10 @@ area_Binario.place(x=260,y=500)
 def clickEnviar():
     direccionip = ip.get ( "1.0", 'end-1c' )
     print(direccionip)
-    mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
+    if ( selected in ['3','4']):
+        mensaje_binario = '0b' + nuevo_text_area.get('1.0', 'end-1c')
+    else:
+        mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
     conexion.startClient(crc.getEnvio(mensaje_binario, selected), direccionip)
 boton = tk.Button(canva, text="Enviar", command=clickEnviar)
 boton.place(x=250,y=700)
