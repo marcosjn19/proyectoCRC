@@ -67,4 +67,8 @@ label_bandera.place(x=50, y=50)
 text_bandera = tk.Label(canva,  height=2, width=4)
 text_bandera.place(x=120, y=50)
 
+label_ip_recibida = tk.Label(canva, text= " ip recibida ")
+label_ip_recibida.place(x=500, y=50)
+
+
 canva.mainloop()
