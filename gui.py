@@ -1,4 +1,7 @@
 import tkinter as tk
+from utils import binario
+from utils import crc
+
 #  canva principal
 canva = tk.Tk()
 canva.title("MARCOS JUAREZ - GAEL COSTILLA")
@@ -10,10 +13,14 @@ def seleccionado( event ):
 def actualizar_binario( event ):
         #mensaje obtendra lo que sta dentro de nuesto text area, desde la posicion 1 hasta el final 
         # y borramos los espaciosW
-    mensaje = area_texto.get( "1.0", tk.END ).strip()
-    binario = ' '.join (format( ord( caracter ), '08b' ) for caracter in mensaje )
+    '''mensaje = area_texto.get( "1.0", tk.END ).strip()
+    binario = ' '.join (format( ord( caracter ), '07b' ) for caracter in mensaje )
     area_Binario.delete( 1.0, tk.END )
-    area_Binario.insert( tk.END, binario )
+    area_Binario.insert( tk.END, binario )'''
+    mensaje = area_texto.get( "1.0", tk.END ).strip()
+    m_binario = binario.toBin(mensaje)
+    area_Binario.delete( 1.0, tk.END )
+    area_Binario.insert( tk.END, m_binario )
 #---------------------------------------------------------------------
 # Variable para almacenar el Text adicional
 nuevo_text_area = None
@@ -96,8 +103,11 @@ area_Binario.pack(pady=10)
 
 #---------------------------------------------
 # Agregar un botón
-boton = tk.Button(canva, text="Enviar")
-boton.pack(pady=10)
 
+def clickEnviar():
+    print("ENVIADO")
+    
+boton = tk.Button(canva, text="Enviar", command=clickEnviar)
+boton.pack(pady=10)
 
 canva.mainloop()
