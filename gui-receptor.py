@@ -80,8 +80,9 @@ label_ip_recibida.place(x=500, y=50)
 def recibirMensaje():
     mensaje = conexion.startServer()
     datosMensaje = crc.obtenerMensajeOG(mensaje, lista.get ( lista.curselection() ) )
-    mensajeBinarioRecibido.set(datosMensaje[0])
-    mensajeRecibido.set(binario.fromBin(mensajeBinarioRecibido))
+    mensajeBinarioRecibido.set(datosMensaje[0][2::])
+    mensajeBinstr = mensajeBinarioRecibido.get()
+    mensajeRecibido.set(binario.fromBin(mensajeBinstr))
 
 boton = tk.Button(canva, text="RECIBIR", command=recibirMensaje)
 boton.place(x = 550, y = 100)
