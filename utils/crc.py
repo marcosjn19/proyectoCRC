@@ -54,6 +54,8 @@ def obtenerMensajeOG ( mensaje:bin, gradoPolinomio ):
     return {0:bin(mensajeOG), 1:calculado, 2:correcto}
 
 def prueba():
+    mensajeOriginal = '0b1101'
+    print(f"MENSAJE ORIGINAL:{mensajeOriginal}")
     #EMISOR (EL QUE ENVIA EL MENSAJE, CLIENTE)
     mensajeEnviado = getEnvio(mensajeOriginal, '4')
     print(f"MENSAJE ENVIADO: {mensajeEnviado}")
@@ -65,6 +67,4 @@ def prueba():
 if __name__ == '__main__':
     prueba()
 
-mensajeOriginal = '0b1101'
-print(f"MENSAJE ORIGINAL:{mensajeOriginal}")
 

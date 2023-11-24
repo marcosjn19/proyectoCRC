@@ -2,7 +2,7 @@ from utils import conexion
 from utils import crc
 from utils import binario
 
-ip = input('INGRESA LA IP')
+ip = '192.168.1.15'#input('INGRESA LA IP')
 mensaje = "ola"
 mensaje_binario = '0b' + binario.toBin(mensaje)
 print(mensaje_binario)
