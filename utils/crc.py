@@ -53,14 +53,18 @@ def obtenerMensajeOG ( mensaje:bin, gradoPolinomio ):
         correcto = True
     return {0:bin(mensajeOG), 1:calculado, 2:correcto}
 
+def prueba():
+    mensajeOriginal = '0b1101'
+    print(f"MENSAJE ORIGINAL:{mensajeOriginal}")
+    #EMISOR (EL QUE ENVIA EL MENSAJE, CLIENTE)
+    mensajeEnviado = getEnvio(mensajeOriginal, '4')
+    print(f"MENSAJE ENVIADO: {mensajeEnviado}")
 
-mensajeOriginal = '0b1101'
-print(f"MENSAJE ORIGINAL:{mensajeOriginal}")
+    #RECEPTOR (EL QUE RECIBE EL MENSAJE, SERVIDOR)
+    mensajeRecibido = obtenerMensajeOG(mensajeEnviado,'4')
+    print(f"MENSAJE RECIBIDO: {mensajeRecibido[0]}  CALCULADO: {mensajeRecibido[1]}  LLEGO CORRECTO: {mensajeRecibido[2]}")
 
-#EMISOR (EL QUE ENVIA EL MENSAJE, CLIENTE)
-mensajeEnviado = getEnvio(mensajeOriginal, '4')
-print(f"MENSAJE ENVIADO: {mensajeEnviado}")
+if __name__ == '__main__':
+    prueba()
 
-#RECEPTOR (EL QUE RECIBE EL MENSAJE, SERVIDOR)
-mensajeRecibido = obtenerMensajeOG(mensajeEnviado,'4')
-print(f"MENSAJE RECIBIDO: {mensajeRecibido[0]}  CALCULADO: {mensajeRecibido[1]}  LLEGO CORRECTO: {mensajeRecibido[2]}")
+
