@@ -15,46 +15,17 @@ def actualizar_binario( event ):
     area_Binario.delete( 1.0, tk.END )
     area_Binario.insert( tk.END, binario )
 #---------------------------------------------------------------------
-# Variable para almacenar el Text adicional
-nuevo_text_area = None
-
-# Función que se llama al seleccionar un elemento en la lista
-def seleccionado(event):
-    global nuevo_text_area
-    seleccion1 = lista.get(lista.curselection())
-
-
-    # Si se selecciona el elemento 3 o 4, crea y muestra un nuevo Text
-    if seleccion1 in ["3", "4"]:
-        if nuevo_text_area:
-            nuevo_text_area.destroy()  # Elimina el Text existente si hay alguno
-        crear_nuevo_text_area()
-    else:
-        if nuevo_text_area:
-            nuevo_text_area.destroy()  # Elimina el Text existente si hay alguno
-            
-
-# Función para crear y mostrar un nuevo Text
-def crear_nuevo_text_area():
-    global nuevo_text_area
-    label_nuevo_area = tk.Label(canva, text="Nuevo Text Area:")
-    label_nuevo_area.pack(pady=5)
-    nuevo_text_area = tk.Text(canva, height=5, width=40)
-    nuevo_text_area.pack(pady=10)
-   
-
-
 
 
 #-----------------------------------------------------------
 # Establecer el color de fondo de la ventana
-canva.configure( background = "#0a0a0a" )  # Puedes cambiar el código de color a tu preferencia
+canva.configure( background = "#2E8B57" )  # Puedes cambiar el código de color a tu preferencia
 
 #darle tamañito al canvansito poke ta chiquito
 canva.geometry( "700x700" )
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text="CRC", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
+label = tk.Label( canva, text="CRC receptor", font=("Helvetica", 29, "bold"),background="#2E8B57", foreground="#000000" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
@@ -73,14 +44,11 @@ lista.bind("<<ListboxSelect>>", seleccionado)
 label_resultado = tk.Label(canva, text="")
 label_resultado.pack(pady=10)
 
-label_mensaje= tk.Label(canva, text="ingresa tu mensaje", bg="#0a0a0a", fg="#FFFFFF")
+label_mensaje= tk.Label(canva, text="Mensaje recibido", bg="#0a0a0a", fg="#FFFFFF", state=tk.DISABLED)
 label_mensaje.pack(pady=10)
 
-def on_validate(P):
-    return len(P) <= 50
 
-validate_cmd = (canva.register(on_validate), '%P')
-area_texto = tk.Text(canva, height=10, width=40)
+area_texto = tk.Text(canva, height=10, width=40, state=tk.DISABLED)
 area_texto.pack(pady=10)
 area_texto.bind("<KeyRelease>", actualizar_binario)
 
@@ -88,7 +56,7 @@ area_texto.bind("<KeyRelease>", actualizar_binario)
 label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF")
 label_Binario.pack(pady=10)
 
-area_Binario = tk.Text(canva, height=10, width=40)
+area_Binario = tk.Text(canva, height=10, width=40, state=tk.DISABLED)
 area_Binario.pack(pady=10)
 
 #---------------------------------------------
