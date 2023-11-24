@@ -13,7 +13,7 @@ def toPureBin ( msg: str ) -> int:
 
 def fromBin ( cadena_binaria:str) -> str:
     # Divide la cadena binaria en bloques de 8 bits
-    bloques_de_8_bits = [cadena_binaria[i:i+8] for i in range(0, len(cadena_binaria), 8)]
+    bloques_de_8_bits = [cadena_binaria[i:i+7] for i in range(0, len(cadena_binaria), 7)]
 
     # Convierte cada bloque de 8 bits a un número entero
     numeros_enteros = [int(bloque, 2) for bloque in bloques_de_8_bits]
