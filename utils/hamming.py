@@ -8,6 +8,12 @@ def obtenerCantidad ( mensaje:bin ):
         cantidad+=1
     return 0
 
+def obtenerLista ( string:str ):
+    listaString = []
+    for i in string:
+        listaString.append(i)
+    return listaString
+
 def asignarParidad ( mensaje: bin ):
     mensajeParidad = len(mensaje)*'0' + obtenerCantidad(mensaje)*'0'
     listaMensajeOriginal = []
@@ -46,25 +52,53 @@ def obtenerMensajeEnviar ( mensaje: bin ):
         if ( listaPrueba.count('1') % 2 != 0 ):
             listaPrueba[0] = '1'    
 
-        print(listaPrueba)
+        #print(listaPrueba)
         listaMensajeParidad[listaMensajeParidad.index('a')] = listaPrueba[0]
         listaPrueba.clear()
     
     return ''.join(listaMensajeParidad)
 
-def obtenerMensajeOg ( mensaje:bin ):
+def obtenerParidadMensaje ( mensaje:bin ):
     mensajeOg = ""
-    return mensajeOg
+    listaBitsParidad = []    
+
+    for i in range ( len(mensaje) ):
+        if ( i+1 == 1 or (math.log2(i+1).is_integer() and math.log2(i+1) != 0 )):
+            listaBitsParidad.append(mensaje[i])
+        else:
+            mensajeOg += mensaje[i]
+    
+    return ''.join(listaBitsParidad), mensajeOg
+
+def comprobarMensajeOg ( mensaje:bin):
+    paridad, mensajeRecibido = obtenerParidadMensaje ( mensaje )
+    calculadoRecibido = obtenerMensajeEnviar ( mensajeRecibido )
+    paridadCalculado =  obtenerLista ( obtenerParidadMensaje ( calculadoRecibido )[0] )
+    paridadCalculado[0]='0'
+    paridadCalculado[3]='1'
+    print(paridadCalculado)
+    flag = True
+    for i in range ( len(paridadCalculado) ):
+        paridadCalculado[i] = str( int(paridadCalculado[i],2) ^ int(paridad[i],2) )
+    posicionError = int(''.join(paridadCalculado),2)
+    listaMensajeCorregido = []
+
+    if ( posicionError > 0 and posicionError < 11):
+        for i in mensaje:
+            listaMensajeCorregido.append(i)
+        listaMensajeCorregido[posicionError-1] = str ( int(listaMensajeCorregido[posicionError-1]) ^ 1 )
+        flag = False
+
+    return mensaje, flag, ''.join(listaMensajeCorregido)
 
 def prueba():
     mensaje = '0110101'
-    print(obtenerCantidad(mensaje))
+    print(f"Mensaje original: {mensaje}")
     mensajeEnviado = obtenerMensajeEnviar(mensaje)
-    print(mensajeEnviado)
+    print(f"Mensaje enviado: {mensajeEnviado}")
     print("--------------------")
-    mensajeRecibido = obtenerMensajeOg(mensajeEnviado)
-    print(mensajeRecibido)
-    
+    mensajeRecibido = comprobarMensajeOg(mensajeEnviado)
+    print(f"Mensaje Recibido: {mensajeRecibido[0]}, ¿Llegó correcto? {mensajeRecibido[1]}, Corrección {mensajeRecibido[2]}")
 
 if __name__ == '__main__':
     prueba()
