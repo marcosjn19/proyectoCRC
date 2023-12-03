@@ -37,11 +37,9 @@ def obtenerMensajeEnviar ( mensaje: bin ):
     listaPrueba = []
     for j in range(obtenerCantidad(mensaje)):
         for i in range(len(mensajeParidad)):
-            #print(bin(i+1))
             if bin(i+1)[len(bin(i+1))-(j+1)] == '1':
                 listaPrueba.append(mensajeParidad[i])
                 
-        
         if ( listaPrueba.count('0') % 2 != 0 ):
             listaPrueba[0] = '0'
         
@@ -54,10 +52,19 @@ def obtenerMensajeEnviar ( mensaje: bin ):
     
     return ''.join(listaMensajeParidad)
 
+def obtenerMensajeOg ( mensaje:bin ):
+    mensajeOg = ""
+    return mensajeOg
+
 def prueba():
-    mensaje = '1001001010'
+    mensaje = '0110101'
     print(obtenerCantidad(mensaje))
-    print(obtenerMensajeEnviar(mensaje))
+    mensajeEnviado = obtenerMensajeEnviar(mensaje)
+    print(mensajeEnviado)
+    print("--------------------")
+    mensajeRecibido = obtenerMensajeOg(mensajeEnviado)
+    print(mensajeRecibido)
+    
 
 if __name__ == '__main__':
     prueba()
