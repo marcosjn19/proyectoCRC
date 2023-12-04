@@ -1,8 +1,14 @@
+#   GUI DEL RECEPTOR QUE NOS PERMITE RECIBIR LA INFORMACION ENVIADA POR EL EMISOR APLICANDO
+#   LAS FUNCIONES DE LAS CLASES CRC Y HAMMING UTILIZANDO UNA CONEXION ENTRE DISPOSITIVOS
+
+#---------------------------------------------------------------
+# INVOCACION DE LIBRERIAS Y CLASES 
 import tkinter as tk
 from utils import conexion
 from utils import crc
 from utils import binario
 
+#-------------------------------------------------------------------
 #  canva principal
 canva = tk.Tk()
 global mensajeBinarioRecibido
@@ -15,7 +21,7 @@ canva.title("MARCOS JUAREZ - GAEL COSTILLA")
 #---------------------------------------------------------------
 def seleccionado( event ):
     seleccionado = lista.get( lista.curselection() )
-    label_resultado.config( text = f"Seleccionado: {seleccionado}")
+# label_resultado.config( text = f"Seleccionado: {seleccionado}")
 #---------------------------------------------------------------
 # Establecer el color de fondo de la ventana
 canva.configure( background = "#2E8B57" )  # Puedes cambiar el código de color a tu preferencia
@@ -83,8 +89,11 @@ label_ip_recibida.place(x=500, y=50)
 
 
 #-------------------------------------------------
+#recepcion de mensaje
 def recibirMensaje():
+    #verificacion de conecion
     mensaje = conexion.startServer()
+    #obtencion de mensaje
     datosMensaje = crc.obtenerMensajeOG(mensaje, lista.get ( lista.curselection() ) )
     mensajeBinarioRecibido.set(datosMensaje[0][2::])
     mensajeBinstr = mensajeBinarioRecibido.get()

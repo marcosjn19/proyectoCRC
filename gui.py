@@ -1,3 +1,8 @@
+#  GUI DEL EMISOR QUE NOS PERMITE IMPLEMENTAR 
+#   LAS FUNCIONES DE LAS CLASES CRC Y HAMMING UTILIZANDO UNA CONEXION ENTRE DISPOSITIVOS
+
+#---------------------------------------------------------------
+# INVOCACION DE LIBRERIAS Y CLASES 
 import tkinter as tk
 from utils import tamañoWidget
 from utils import binario
@@ -6,6 +11,7 @@ from utils import conexion
 #  canva principal
 canva = tk.Tk()
 canva.title("MARCOS JUAREZ - GAEL COSTILLA")
+
 #---------------------------------------------------------------
 def actualizar_binario( event ):
         #mensaje obtendra lo que sta dentro de nuesto text area, desde la posicion 1 hasta el final 
@@ -21,7 +27,7 @@ def actualizar_binario( event ):
 #---------------------------------------------------------------------
 # Variable para almacenar el Text adicional
 nuevo_text_area = None
-
+#-----------------------------------------------------------
 # Función que se llama al seleccionar un elemento en la lista
 def seleccionado(event):
     global nuevo_text_area
@@ -56,11 +62,12 @@ def crear_nuevo_text_area():
 #-----------------------------------------------------------
 # Establecer el color de fondo de la ventana
 canva.configure( background = "#0a0a0a" )  
-
+#-----------------------------------------------------------
 #darle tamaño a nuestro area de ventana
 canva.geometry( "700x800" )
 
-# Crear un widget de etiqueta
+#-----------------------------------------------------------
+# Crear un widget de etiqueta de titulo
 label = tk.Label( canva, text = "CRC/HAMMING", font = ("Helvetica", 29, "bold"), background = "#0a0a0a", foreground = "#FFFFFF" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
@@ -107,6 +114,8 @@ validate_cmd = (canva.register(on_validate), '%P')
 #area_texto=tamañoWidget.tam(canva, max_len=16)
 #area_texto.place(x=260,y=290)
 #area_texto.bind("<KeyRelease>", actualizar_binario)
+#-----------------------------------------------------------
+#AREA DE MENSAJE A ENVIAR
 validate_cmd = ( canva.register( on_validate ), '%P' )
 area_texto = tk.Text( canva, height = 10, width = 40 )
 area_texto.place( x = 260,y = 290 )
@@ -114,10 +123,12 @@ area_texto.bind( "<KeyRelease>", actualizar_binario )
 
 
 #----------------------------------------------------------------
-#area de conversion de binario
+#LABEL de conversion de binario
 label_Binario= tk.Label( canva, text = "conversion binaria:", bg = "#0a0a0a", fg = "#FFFFFF", font = ("Helvetica", 12) )
 label_Binario.place( x = 120,y = 490 )
 
+#------------------------------
+#AREA DE CONVERSION BINARIO
 area_Binario = tk.Text(canva, height=10, width=40)
 area_Binario.place( x = 260,y = 500 )
 
@@ -127,7 +138,7 @@ area_Binario.place( x = 260,y = 500 )
 def on_checkbox_click():
     selected_value.set( "Seleccionado" if checkbox_var.get() else "No seleccionado" )
 
-# Variable truetsito
+# Variable DE ESTADO
 checkbox_var = tk.BooleanVar()
 
 # Crear el Checkbutton
