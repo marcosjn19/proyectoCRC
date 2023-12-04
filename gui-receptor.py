@@ -86,6 +86,22 @@ ip_txt.set(conexion.obtener_ip())
 
 label_ip_recibida = tk.Label ( canva, textvariable=ip_txt )
 label_ip_recibida.place(x=500, y=50)
+#--------------------------------------------
+# Informacion del checkbox, declaracion
+def on_checkbox_click():
+    selected_value.set( "Seleccionado" if checkbox_var.get() else "No seleccionado" )
+
+# Variable DE ESTADO
+checkbox_var = tk.BooleanVar()
+
+# Crear el Checkbutton
+checkbox = tk.Checkbutton( canva, text = "seleciona si desea usar el hamming", variable = checkbox_var, command = on_checkbox_click )
+checkbox.place( x = 450,y = 100 )
+
+# Variabletest
+selected_value = tk.StringVar()
+selected_value.set( "No seleccionado" )
+
 
 
 #-------------------------------------------------
