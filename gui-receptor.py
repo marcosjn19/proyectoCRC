@@ -25,7 +25,7 @@ canva.configure( background = "#2E8B57" )  # Puedes cambiar el código de color 
 canva.geometry( "700x700" )
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text="CRC receptor", font=("Helvetica", 29, "bold"),background="#2E8B57", foreground="#000000" )
+label = tk.Label( canva, text="CRC/HAMMING receptor", font=("Helvetica", 29, "bold"),background="#2E8B57", foreground="#000000" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
@@ -73,7 +73,7 @@ label_ip_recibida = tk.Label ( canva, textvariable=ip_txt )
 label_ip_recibida.place(x=500, y=50)
 
 
-
+#-------------------------------------------------
 def recibirMensaje():
     mensaje = conexion.startServer()
     datosMensaje = crc.obtenerMensajeOG(mensaje, lista.get ( lista.curselection() ) )

@@ -1,4 +1,5 @@
 import tkinter as tk
+from utils import tamañoWidget
 from utils import binario
 from utils import crc
 from utils import conexion
@@ -57,7 +58,7 @@ canva.configure( background = "#0a0a0a" )  # Puedes cambiar el código de color 
 canva.geometry( "700x800" )
 
 # Crear un widget de etiqueta
-label = tk.Label( canva, text="CRC-Emisor", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
+label = tk.Label( canva, text="CRC/HAMMING", font=("Helvetica", 29, "bold"), background="#0a0a0a", foreground="#FFFFFF" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
@@ -80,7 +81,7 @@ for i in elementos:
 
 lista.bind("<<ListboxSelect>>", seleccionado)
 
-label_resultado = tk.Label(canva, text="")
+label_resultado = tk.Label(canva, text="olaa")
 label_resultado.place(x=130,y=400)
 
 label_mensaje= tk.Label(canva, text="ingresa tu mensaje", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
@@ -90,9 +91,12 @@ def on_validate(P):
     return len(P) <= 50
 
 validate_cmd = (canva.register(on_validate), '%P')
+
+
 area_texto = tk.Text(canva, height=10, width=40)
 area_texto.place(x=260,y=290)
 area_texto.bind("<KeyRelease>", actualizar_binario)
+ 
 
 
 label_Binario= tk.Label(canva, text="conversion binaria:", bg="#0a0a0a", fg="#FFFFFF", font=("Helvetica", 12))
@@ -100,6 +104,26 @@ label_Binario.place(x=120,y=490)
 
 area_Binario = tk.Text(canva, height=10, width=40)
 area_Binario.place(x=260,y=500)
+
+
+
+#--------------------------------------------
+def on_checkbox_click():
+    selected_value.set("Seleccionado" if checkbox_var.get() else "No seleccionado")
+
+# Variable truetsito
+checkbox_var = tk.BooleanVar()
+
+# Crear el Checkbutton
+checkbox = tk.Checkbutton(canva, text="seleciona si desea usar el hamming", variable=checkbox_var, command=on_checkbox_click)
+checkbox.place(x=450,y=100)
+
+# Variabletest
+selected_value = tk.StringVar()
+selected_value.set("No seleccionado")
+
+
+
 #---------------------------------------------
 # Agregar un botón
 
