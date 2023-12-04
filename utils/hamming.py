@@ -120,6 +120,7 @@ def obtenerParidadMensaje ( mensaje:bin ):
 #METODO PARA COMPROBAR Y CORREGIR (de ser necesario) EL MENSAJE RECIBIDO
 def comprobarMensajeOg ( mensaje:bin):
     #Utilizamos el metodo anterior a este para poder obtener los bits de paridad y el mensaje recibido
+    #mensaje = mensaje[:1]+'0'+mensaje[2:] #<- Simular un fallo
     paridad, mensajeRecibido = obtenerParidadMensaje ( mensaje )
     #Utilizamos los metodos que ya tenemos para calcular los bits de paridad del mensaje recibido
                         #Obtenemos un "mensaje a enviar" del recibido
@@ -155,8 +156,9 @@ def comprobarMensajeOg ( mensaje:bin):
         #Ponemos la bandera en falso
         flag = False
 
+    mensajeCorregido = obtenerParidadMensaje(''.join(listaMensajeCorregido))[1]
     #Regresamos el mensaje recibido, la bandera y el mensaje ya corregido (en caso de no haber corrección regresa nulo)
-    return mensaje, flag, ''.join(listaMensajeCorregido)
+    return mensajeRecibido, flag, mensajeCorregido
 
 
 #--------------------------------------------------------------------------
