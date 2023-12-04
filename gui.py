@@ -8,6 +8,7 @@ from utils import tamañoWidget
 from utils import binario
 from utils import crc
 from utils import conexion
+from utils import hamming
 #  canva principal
 canva = tk.Tk()
 canva.title("MARCOS JUAREZ - GAEL COSTILLA")
@@ -68,7 +69,7 @@ canva.geometry( "700x800" )
 
 #-----------------------------------------------------------
 # Crear un widget de etiqueta de titulo
-label = tk.Label( canva, text = "CRC/HAMMING", font = ("Helvetica", 29, "bold"), background = "#0a0a0a", foreground = "#FFFFFF" )
+label = tk.Label( canva, text = "CRC/DISTANCIA HAMMING", font = ("Helvetica", 29, "bold"), background = "#0a0a0a", foreground = "#FFFFFF" )
 label.pack( pady = 10 )
 #el pack pady se refiere al al padding que se le dara al widget ya sea arriba o abajo seria a su alrededor
 
@@ -154,11 +155,17 @@ selected_value.set( "No seleccionado" )
 
 def clickEnviar():
     direccionip = ip.get ( "1.0", 'end-1c' )
-    if ( selected in ['3','4']):
-        mensaje_binario = '0b' + nuevo_text_area.get('1.0', 'end-1c')
-    else:
-        mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
-    conexion.startClient(crc.getEnvio(mensaje_binario, selected), direccionip)
+    #Si el envio sera por hamming:
+    if ( checkbox_var.get() ):
+        mensaje_binario = '' + area_Binario.get('1.0','end-1c')
+        conexion.startClient(hamming.obtenerMensajeEnviar(mensaje_binario), direccionip)
+    else: #Si no (por CRC)
+        if ( selected in ['3','4']):
+            mensaje_binario = '0b' + nuevo_text_area.get('1.0', 'end-1c')
+        else:
+            mensaje_binario = '0b' + area_Binario.get ('1.0', 'end-1c')
+        conexion.startClient(crc.getEnvio(mensaje_binario, selected), direccionip)
+        
 boton = tk.Button(canva, text="Enviar", command=clickEnviar)
 boton.place(x=250,y=700)
 

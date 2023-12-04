@@ -51,7 +51,7 @@ def asignarParidad ( mensaje: bin ):
     for i in range ( len(listaMensaje) ):
             #Primera posición siempre tiene paridad ó la posición es una potencia de 2 y no es 1
         if ( i+1 == 1 or (math.log2(i+1).is_integer() and math.log2(i+1) != 0 )):
-            listaMensaje[i] = 'a'
+            listaMensaje[i] = 'a' #<- Asignamos una 'a' a la posicion del bit de paridad
         else:
             #Si no es un bit de paridad, va añadiendo de la lista del mensajeOriginal
             listaMensaje[i] = listaMensajeOriginal.pop()
@@ -84,11 +84,11 @@ def obtenerMensajeEnviar ( mensaje: bin ):
 
         #Si la cantidad de 0's es la impar, el bit de paridad es un 0        
         if ( listaPrueba.count('0') % 2 != 0 ):
-            listaPrueba[0] = '0'
+            listaPrueba[0] = '0' #<- Remplazamos la 'a' por un 0
         
         #Si la cantidad de 1's es la impar, el bit de paridad es un 1
         if ( listaPrueba.count('1') % 2 != 0 ):
-            listaPrueba[0] = '1'    
+            listaPrueba[0] = '1' #<- Remplazamos la 'a' por un 1
 
         #Asignamos el bit de paridad donde este el proximo index de 'a'
         listaMensajeParidad[listaMensajeParidad.index('a')] = listaPrueba[0]
