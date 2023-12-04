@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class tam(tk.Entry):
-    def __init__(self, master=None, max_len=5, **kwargs):
+    def __init__(self, master=None, max_len=0, **kwargs):
         self.var = tk.StringVar()
         self.max_len = max_len
         tk.Entry.__init__(self, master, textvariable=self.var, **kwargs)
