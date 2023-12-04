@@ -1,4 +1,12 @@
+'''
+CLASE UTILIZADA COMO AUXILIAR PARA REALIZAR LA CORRECTA CONEXION ENTRE EMISOR
+                    Y RECEPTOR
+'''
+
 import socket
+
+#--------------------------------------------------------------------------
+#METODO PARA OBTENER LA IP DEL QUE VA A RECIBIR
 def obtener_ip():
     try:
         # Crear un socket UDP
@@ -11,10 +19,14 @@ def obtener_ip():
     except socket.error:
         return "127.0.0.1"  # En caso de error, usar localhost
 
+#--------------------------------------------------------------------------
+#METODO AUXILIAR QUE REGRESA LA IP Y EL PUERTO (30900)
 def setupServer():
     ip = obtener_ip()
     return [ip, 30900]
 
+#--------------------------------------------------------------------------
+#METODO PARA QUE EL SERVER COMIENZE A 'ESCUCHAR'
 def startServer():
     data = setupServer()
     host = data[0]
@@ -36,6 +48,8 @@ def startServer():
         datos = conexion.recv(1024)
         return datos.decode()
 
+#--------------------------------------------------------------------------
+#METODO PARA QUE EL CLIENTE ENVIE EL MENSAJE
 def startClient(mensaje, ip):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
         cliente.connect((ip, 30900))
